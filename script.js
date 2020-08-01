@@ -77,7 +77,7 @@ function calcular() {
                 res.innerHTML = `Valor da hipotenusa:  ${vlrh(Number(cat1.value), Number(cat2.value))}`
 
             } else {
-                alert('[Erro] É necessário colocar uma icógnita.')
+                alert('[Erro] É necessário colocar uma icógnita')
             }
    
         } else {
