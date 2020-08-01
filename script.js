@@ -81,7 +81,7 @@ function calcular() {
             }
    
         } else {
-            alert('[Erro] Digite apenas uma icógnita')
+            alert('[Erro] Você não adicionou uma icógnita ou digitou mais de uma.')
         }
 
     } else {
