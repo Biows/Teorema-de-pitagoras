@@ -74,7 +74,7 @@ function calcular() {
         res.innerHTML += `Valor do Cateto adjacente = ${vlrc2(h.value, c1.value)}`
     }else{
         if(erro == 1){
-            if(c1.value > h.value || c1.value > h.value){
+            if(c1.value > h.value || c2.value > h.value){
                 res.style.color = 'red'
                 erro = 'A medida dos catetos não podem ser maiores que o da hipotenusa.'
                 res.innerHTML = erro
