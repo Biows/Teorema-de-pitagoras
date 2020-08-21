@@ -1,91 +1,91 @@
-function isWrite(h, c1, c2) {
-    if (h.length != 0 && c1.length != 0 && c2.length != 0) {
-        return true
-    } else {
-        return false
-    }
-}
+let h = document.getElementById('hipo')
+let c1 = document.getElementById('cat1')
+let c2 = document.getElementById('cat2')
+let res = document.getElementById('res')
+let erro = ''
 
-function isNull(h, c1, c2) {
-    if (h >= 0 && c1 >= 0 && c2 >= 0) {
-        return true
-    } else {
-        return false
-    }
-}
+const calcPitagoras = {
+    cateto1: (c2, h) => {return Math.pow((Math.pow(c2,2) - Math.pow(h,2)),0.5)},
+    cateto2:  (c1, h) => {return Math.pow((Math.pow(c1,2) - Math.pow(h,2)),0.5)},
+    hipotenusa: (c1, c2) => {return Math.pow((Math.pow(c1,2) + Math.pow(c2,2)),0.5)}
+} 
 
-function isIcognit(c1, c2, h) {
-    if (c1 == 0) {
-        return 1
-    } else if (c2 == 0) {
-        return 2
-    } else if (h == 0) {
-        return 3
-    } else {
-        return false
-    }
+const vlrc1 = calcPitagoras.cateto1
+const vlrc2 = calcPitagoras.cateto2
+const vlrh = calcPitagoras.hipotenusa
 
-}
+function isWrite(h=0, c1=0, c2=0) {
+    if(h >= 0 && c1 >= 0 && c2 >= 0){
+        if(h == 0){
 
-function quantIcog(c1, c2, h) {
-
-    if (c1 == 0) {
-
-        if (c2 == 0 || h == 0) {
+            if(c1 == 0 || c2 == 0){
+                erro = 'Não é possível fazer o cálculo com mais de uma icógnita.'
+                return false
+            }else{
+                return 1 //hipotenusa icógnita
+            }
+        }else if(c1 == 0){
+            if(c2 >= h){
+                erro = 'A medida dos catetos não podem ser maiores ou iguais o da hipotenusa.'
+                return false
+            }else{
+                if(h == 0 || c2 == 0){
+                    erro = 'Não é possível fazer o cálculo com mais de uma icógnita.'
+                    return false
+                }else{
+                    return 2 //Cateto1 icógnita
+                }
+            }
+        }else if(c2 == 0){
+            if(c1 >= h){
+                erro = 'A medida dos catetos não podem ser maiores ou iguais o da hipotenusa.'
+                return false
+            }else{
+                if(c1 == 0 || h == 0){
+                    erro = 'Não é possível fazer o cálculo com mais de uma icógnita.'
+                    return false
+                }else{
+                    return 3 //Cateto2 icógnita
+                }
+            }    
+        }else{
+            erro = 1
             return false
-        } else {
-            return true
-        }
-    } else if (c2 == 0) {
-
-        if (h == 0) {
-            return false
-        } else {
-            return true
-        }
-    } else if (h == 0) {
-        return true
+        }    
+    }else{
+        erro = 'Números negativos são inválidos'
+        return false
     }
-}
+}    
 
 function calcular() {
-    let hipo = document.getElementById('hipo')
-    let cat1 = document.getElementById('cat1')
-    let cat2 = document.getElementById('cat2')
-    let res = document.getElementById('res')
-
-    if (isWrite(hipo.value, cat1.value, cat2.value) && isNull(hipo.value, cat1.value, cat2.value)) {
-
-        if (quantIcog(hipo.value, cat1.value, cat2.value)) {
-
-            if (isIcognit(cat1.value, cat2.value, hipo.value) == 1) {
-                const vlrc1 = function (c2, h) {
-                    return Math.pow((Math.pow(c2,2) - Math.pow(h,2)),0.5)
-                }
-                res.innerHTML = `Valor do cateto <sub>1</sub>:  ${vlrc1(Number(hipo.value), Number(cat2.value))}`
-
-            } else if (isIcognit(cat1.value, cat2.value, hipo.value) == 2) {
-                const vlrc2 = function (c1, h) {
-                    return Math.pow((Math.pow(c1,2) - Math.pow(h,2)),0.5)
-                }
-                res.innerHTML = `Valor do cateto <sub>2</sub>:  ${vlrc2(Number(hipo.value), Number(cat1.value))}`
-
-            } else if (isIcognit(cat1.value, cat2.value, hipo.value) == 3) {
-                const vlrh = function (c1, c2) {
-                    return Math.pow((Math.pow(c1,2) + Math.pow(c2,2)),0.5)
-                }
-                res.innerHTML = `Valor da hipotenusa:  ${vlrh(Number(cat1.value), Number(cat2.value))}`
-
-            } else {
-                alert('[Erro] É necessário colocar uma icógnita')
+    res.style.color = ''
+    if (isWrite(h.value, c1.value, c2.value) == 1) {
+        res.innerHTML = `Valor da hipotenusa = ${vlrh(c1.value, c2.value)}<br><br>`
+        res.innerHTML += `Valor do Cateto oposto = ${c1.value}<br><br>`
+        res.innerHTML += `Valor do Cateto adjacente = ${c2.value}`
+    }else if(isWrite(h.value, c1.value, c2.value) == 2){
+        res.innerHTML = `Valor da hipotenusa = ${h.value}<br><br>`
+        res.innerHTML += `Valor do Cateto oposto = ${vlrc1(h.value, c2.value)}<br><br>`
+        res.innerHTML += `Valor do Cateto adjacente = ${c2.value}`
+    }else if(isWrite(h.value, c1.value, c2.value) == 3){
+        res.innerHTML = `Valor da hipotenusa = ${h.value}<br><br>`
+        res.innerHTML += `Valor do Cateto oposto = ${c1.value}<br><br>`
+        res.innerHTML += `Valor do Cateto adjacente = ${vlrc2(h.value, c1.value)}`
+    }else{
+        if(erro == 1){
+            if(c1.value > h.value || c1.value > h.value){
+                res.style.color = 'red'
+                erro = 'A medida dos catetos não podem ser maiores que o da hipotenusa.'
+                res.innerHTML = erro
+            }else{
+                res.innerHTML = `Valor da hipotenusa = ${h.value}<br><br>`
+            res.innerHTML += `Valor do Cateto oposto = ${c1.value}<br><br>`
+            res.innerHTML += `Valor do Cateto adjacente = ${c2.value}`
             }
-   
-        } else {
-            alert('[Erro] Você não adicionou uma icógnita ou digitou mais de uma.')
+        }else{
+            res.style.color = 'red'
+            res.innerHTML = erro
         }
-
-    } else {
-        alert('[Erro] Digite os dados corretamente.')
     }
-
 }

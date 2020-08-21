@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Teorema de pitágoras</title>
     <link rel="stylesheet" href="estilo.css">
-    <script src="script.js"></script>
+    
 </head>
 <body>
     <header>
@@ -13,25 +13,27 @@
     </header>
 
     <section>
-        <div>
-            <p>Digite o valor da hipotenusa:
-                <input type="number" name="" id="hipo" placeholder="Se for icógnita digite 0">
+
+            <p>Medida da hipotenusa:<br>
+                <input type="number" name="" id="hipo" autofocus>
             </p>
-            <p>Digite o valor do cateto<sub>1</sub>:
-                <input type="number" name="" id="cat1" placeholder="Se for icógnita digite 0">
+            <p>Medida do cateto oposto:<br>
+                <input type="number" name="" id="cat1">
             </p>
-            <p>Digite o valor do cateto<sub>2</sub>:
-                <input type="number" name="" id="cat2" placeholder="Se for icógnita digite 0">
+            <p>Medida do cateto adjacente:<br>
+                <input type="number" name="" id="cat2">
             </p>
-                <input type="button" value="Calcular" id="btn" onclick="calcular()">
-        </div>
+            <div id="botao">
+                <button type="button" id="btn" onclick="calcular()">Calcular</button>
+            </div>
         <div id="res">
 
         </div>
     </section>
 
     <footer>
-        <p>&copy; Lucaslopespultz</p>
+        <p>&copy; Feito por Lucas Lopes Pultz</p>
     </footer>
+    <script src="script.js"></script>
 </body>
 </html>
